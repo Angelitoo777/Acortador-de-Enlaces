@@ -1,8 +1,8 @@
 {
-  "name": "sistema-de-gestion-de-archivos",
+  "name": "acortador-url",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Angel Oropeza",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
