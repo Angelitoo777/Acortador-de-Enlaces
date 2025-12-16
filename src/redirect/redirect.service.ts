@@ -10,14 +10,14 @@ export class RedirectService {
   ) {}
 
   async findByShortCode(shortUrl: string) {
-    const cacheData = await this.redisService.get(shortUrl);
+    const cacheData = await this.redisService.get(`url:${shortUrl}`);
 
     if (cacheData) {
       await this.redirectRepository.clickCountIncrement(shortUrl);
 
       await this.redisService.del('top');
 
-      return await this.redisService.get(shortUrl);
+      return cacheData;
     }
 
     const shortCodeData =
