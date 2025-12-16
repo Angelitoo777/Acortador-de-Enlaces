@@ -3,6 +3,8 @@ import { ShortenerRepository } from './shortener.repository';
 import Hashids from 'hashids';
 import { ConfigService } from '@nestjs/config';
 import { RedisService } from '../redis/redis.service';
+import { CreateShortenerDto } from './dto/create-shortener.dto';
+import { ResponseShortenerDto } from './dto/response-shortener.dto';
 
 @Injectable()
 export class ShortenerService {
@@ -16,11 +18,14 @@ export class ShortenerService {
     7,
   );
 
-  findAll() {
+  async findAll() {
     return this.shortenerRepository.findAll();
   }
 
-  async createShortUrl(longUrl: string) {
+  async createShortUrl(
+    longUrl: CreateShortenerDto,
+  ): Promise<ResponseShortenerDto> {
+    console.log(longUrl);
     const newUrlData = await this.shortenerRepository.createShortUrl(longUrl);
 
     const numericId = newUrlData.id;
@@ -29,8 +34,13 @@ export class ShortenerService {
 
     await newUrlData.update({ shortUrl });
 
-    await this.redisService.set(`url:${shortUrl}`, longUrl, 3600);
+    await newUrlData.save();
 
-    return newUrlData;
+    await this.redisService.set(`url:${shortUrl}`, longUrl.longUrl, 3600);
+
+    return {
+      longUrl: newUrlData.longUrl,
+      shortUrl: newUrlData.shortUrl,
+    };
   }
 }
