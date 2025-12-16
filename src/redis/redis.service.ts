@@ -24,4 +24,20 @@ export class RedisService {
   async del(key: string): Promise<number> {
     return this.redisClient.del(key);
   }
+
+  async setArray(
+    key: string,
+    value: Array<object>,
+    expireInSeconds?: number,
+  ): Promise<'OK'> {
+    if (expireInSeconds) {
+      return this.redisClient.set(
+        key,
+        JSON.stringify(value),
+        'EX',
+        expireInSeconds,
+      );
+    }
+    return this.redisClient.set(key, JSON.stringify(value));
+  }
 }

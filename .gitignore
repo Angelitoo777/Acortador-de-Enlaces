@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-node_modules
-=======
 # compiled output
 /dist
 /node_modules
@@ -59,4 +56,3 @@ pids
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 /generated/prisma
->>>>>>> 563f8ff (feature: se realizo el modulo completo de shortener solo falta implementar por completo el controller, ademas se agrego con exito sequelize y esta en espera el funcionamiento de redis)

@@ -4,6 +4,7 @@ import { ShortenerModule } from './shortener/shortener.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UrlData } from './shortener/entities/shortener.entity';
 import { RedisModule } from './redis/redis.module';
+import { RedirectModule } from './redirect/redirect.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { RedisModule } from './redis/redis.module';
     }),
     ShortenerModule,
     RedisModule,
+    RedirectModule,
   ],
   controllers: [],
   providers: [],

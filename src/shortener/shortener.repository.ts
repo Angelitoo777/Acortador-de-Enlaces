@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UrlData } from './entities/shortener.entity';
 import { InjectModel } from '@nestjs/sequelize/dist/common/sequelize.decorators';
 import { ModelCtor } from 'sequelize-typescript';
+import { CreateShortenerDto } from './dto/create-shortener.dto';
 
 @Injectable()
 export class ShortenerRepository {
@@ -11,7 +12,7 @@ export class ShortenerRepository {
     return this.urlData.findAll();
   }
 
-  async createShortUrl(longUrl: string) {
-    return this.urlData.create({ longUrl });
+  async createShortUrl(longUrl: CreateShortenerDto): Promise<UrlData> {
+    return this.urlData.create(longUrl);
   }
 }

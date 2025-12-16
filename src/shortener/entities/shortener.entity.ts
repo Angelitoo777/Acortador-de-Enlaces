@@ -1,10 +1,4 @@
-import {
-  AutoIncrement,
-  Column,
-  Model,
-  PrimaryKey,
-  Table,
-} from 'sequelize-typescript';
+import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
 import { DataTypes, Optional } from 'sequelize';
 
 interface UrlAttributes {
@@ -24,13 +18,13 @@ export type UrlCreationAttributes = Optional<
 @Table({ tableName: 'url_data' })
 export class UrlData extends Model<UrlAttributes, UrlCreationAttributes> {
   @PrimaryKey
-  @AutoIncrement
   @Column({
     type: DataTypes.INTEGER,
+    autoIncrement: true,
   })
-  id: string;
+  id: number;
 
-  @Column({ type: DataTypes.STRING, allowNull: false, unique: true })
+  @Column({ type: DataTypes.STRING, allowNull: true, unique: true })
   shortUrl: string;
 
   @Column({ type: DataTypes.STRING, allowNull: false })
