@@ -95,6 +95,11 @@ Incluye creación de enlaces cortos, redirección automática, rastreo de clics,
 - Cache del top de URLs.
 - Invalidación automática al actualizar datos.
 
+### 🔒 Rate Limiting
+- Límite global: 10 solicitudes por minuto.
+- Creación de URLs cortas: 3 solicitudes por minuto.
+- Storage en Redis para escalabilidad.
+
 ### 🛡️ Validación y Seguridad
 - Pipes personalizados con Zod para validación de entrada.
 - Manejo de errores centralizado.

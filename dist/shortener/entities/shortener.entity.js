@@ -18,13 +18,13 @@ exports.UrlData = UrlData;
 __decorate([
     sequelize_typescript_1.PrimaryKey,
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_1.DataTypes.UUID,
-        defaultValue: sequelize_1.DataTypes.UUIDV4,
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
     }),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], UrlData.prototype, "id", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_1.DataTypes.STRING, allowNull: false, unique: true }),
+    (0, sequelize_typescript_1.Column)({ type: sequelize_1.DataTypes.STRING, allowNull: true, unique: true }),
     __metadata("design:type", String)
 ], UrlData.prototype, "shortUrl", void 0);
 __decorate([
@@ -32,7 +32,7 @@ __decorate([
     __metadata("design:type", String)
 ], UrlData.prototype, "longUrl", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_1.DataTypes.INTEGER, defaultValue: 0 }),
+    (0, sequelize_typescript_1.Column)({ type: sequelize_1.DataTypes.INTEGER, defaultValue: 0, allowNull: false }),
     __metadata("design:type", Number)
 ], UrlData.prototype, "clickCount", void 0);
 exports.UrlData = UrlData = __decorate([

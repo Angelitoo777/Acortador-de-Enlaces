@@ -12,6 +12,8 @@ const shortener_service_1 = require("./shortener.service");
 const shortener_controller_1 = require("./shortener.controller");
 const sequelize_1 = require("@nestjs/sequelize");
 const shortener_entity_1 = require("./entities/shortener.entity");
+const shortener_repository_1 = require("./shortener.repository");
+const redis_service_1 = require("../redis/redis.service");
 let ShortenerModule = class ShortenerModule {
 };
 exports.ShortenerModule = ShortenerModule;
@@ -19,7 +21,7 @@ exports.ShortenerModule = ShortenerModule = __decorate([
     (0, common_1.Module)({
         imports: [sequelize_1.SequelizeModule.forFeature([shortener_entity_1.UrlData])],
         controllers: [shortener_controller_1.ShortenerController],
-        providers: [shortener_service_1.ShortenerService],
+        providers: [shortener_service_1.ShortenerService, shortener_repository_1.ShortenerRepository, redis_service_1.RedisService],
     })
 ], ShortenerModule);
 //# sourceMappingURL=shortener.module.js.map

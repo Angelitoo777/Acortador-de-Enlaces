@@ -5,6 +5,10 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { UrlData } from './shortener/entities/shortener.entity';
 import { RedisModule } from './redis/redis.module';
 import { RedirectModule } from './redirect/redirect.module';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis';
+import { RedisService } from './redis/redis.service';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -22,11 +26,25 @@ import { RedirectModule } from './redirect/redirect.module';
         models: [UrlData],
       }),
     }),
+    ThrottlerModule.forRootAsync({
+      imports: [RedisModule],
+      inject: [RedisService],
+      useFactory: (redisService: RedisService) => ({
+        storage: new ThrottlerStorageRedisService(redisService.getClient()),
+
+        throttlers: [
+          {
+            ttl: 60000,
+            limit: 10,
+          },
+        ],
+      }),
+    }),
     ShortenerModule,
     RedisModule,
     RedirectModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}

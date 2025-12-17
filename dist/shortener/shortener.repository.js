@@ -20,8 +20,11 @@ let ShortenerRepository = class ShortenerRepository {
     constructor(urlData) {
         this.urlData = urlData;
     }
-    async createShortUrl(shortUrl, longUrl) {
-        return this.urlData.create({ shortUrl, longUrl });
+    async findAll() {
+        return this.urlData.findAll();
+    }
+    async createShortUrl(longUrl) {
+        return this.urlData.create(longUrl);
     }
 };
 exports.ShortenerRepository = ShortenerRepository;

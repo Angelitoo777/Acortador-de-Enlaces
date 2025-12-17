@@ -40,4 +40,8 @@ export class RedisService {
     }
     return this.redisClient.set(key, JSON.stringify(value));
   }
+
+  getClient(): Redis {
+    return this.redisClient;
+  }
 }
